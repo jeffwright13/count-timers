@@ -17,6 +17,7 @@ class CountTimer:
         start(): start the timer
         pause(): pause the timer
         resume(): resume the timer
+        set_start_time(minutes): set the start time manually in minutes
         reset(): reset the timer to default (duration 0/paused/not started)
 
     Properties:
@@ -62,6 +63,12 @@ class CountTimer:
         pause_duration = time.time() - self._time_paused
         self._time_started = self._time_started + pause_duration
         self._paused = False
+
+    def set_start_time(self, minutes):
+        """Set the start time manually in minutes."""
+        self._time_started = time.time() - (minutes * 60)
+        self._time_paused = time.time()
+        self._paused = True
 
     def _get(self) -> float:
         """Time in sec since timer was started, minus any time paused."""
